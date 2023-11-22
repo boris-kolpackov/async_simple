@@ -1,0 +1,7 @@
+project = async_simple
+
+using version
+using config
+using test
+using install
+using dist

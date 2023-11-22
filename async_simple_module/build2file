@@ -1,0 +1,46 @@
+intf_libs = # Interface dependencies.
+impl_libs = # Implementation dependencies.
+
+import impl_libs += libaio%lib{aio} # @@ Not sure if intf or impl.
+
+# @@ executors/ file to module name mapping.
+
+lib{async_simple}: mxx{** -test/**}
+lib{async_simple}: uthread/internal/S{*_x86_64_sysv_elf_gas}
+lib{async_simple}: $impl_libs $intf_libs
+
+executors/mxx{SimpleExecutor}: cxx.module_name = async_simple:executors.SimpleExecutor
+executors/mxx{SimpleIOExecutor}: cxx.module_name = async_simple:executors.SimpleIOExecutor
+
+# Build options.
+#
+{hbmia obja}{*}: cxx.poptions += -DASYNC_SIMPLE_STATIC_BUILD
+{hbmis objs}{*}: cxx.poptions += -DASYNC_SIMPLE_SHARED_BUILD
+
+# Export options.
+#
+lib{async_simple}:
+{
+  cxx.export.libs = $intf_libs
+}
+
+liba{async_simple}: cxx.export.poptions += -DASYNC_SIMPLE_STATIC
+libs{async_simple}: cxx.export.poptions += -DASYNC_SIMPLE_SHARED
+
+# For pre-releases use the complete version to make sure they cannot be used
+# in place of another pre-release or the final version. See the version module
+# for details on the version.* variable values.
+#
+if $version.pre_release
+  lib{async_simple}: bin.lib.version = "-$version.project_id"
+else
+  lib{async_simple}: bin.lib.version = "-$version.major.$version.minor"
+
+# Install into the async_simple/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+mxx{*}:
+{
+  install         = include/async_simple/
+  install.subdirs = true
+}

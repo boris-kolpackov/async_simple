@@ -1,0 +1,11 @@
+: 1
+name: async_simple
+version: 0.1.0-a.0.z
+summary: Simple, light-weight and easy-to-use asynchronous C++ components
+license: Apache-2.0
+description-file: README.md
+url: https://github.com/alibaba/async_simple
+email: boris@codesynthesis.com
+depends: * build2 >= 0.17.0-
+depends: * bpkg >= 0.17.0-
+#depends: libhello ^1.0.0

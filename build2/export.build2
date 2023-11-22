@@ -1,0 +1,6 @@
+$out_root/
+{
+  include async_simple_module/
+}
+
+export $out_root/async_simple_module/$import.target
