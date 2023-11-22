@@ -81,8 +81,13 @@ T await(Future<T>&& fut) {
 // ```
 export template <class B, class Fn, class C, class... Ts>
 decltype(auto) await(Executor* ex, Fn B::*fn, C* cls, Ts&&... ts) {
+#if 0
     using ValueType =
         typename std::result_of_t<decltype(fn)(C, Ts && ...)>::ValueType;
+#else
+    using ValueType =
+      typename std::invoke_result_t<decltype(fn), C, Ts && ...>::ValueType;
+#endif
     Promise<ValueType> p;
     auto f = p.getFuture().via(ex);
     auto lazy = [p = std::move(p), fn,
@@ -106,8 +111,13 @@ decltype(auto) await(Executor* ex, Fn B::*fn, C* cls, Ts&&... ts) {
 // ```
 export template <class Fn, class... Ts>
 decltype(auto) await(Executor* ex, Fn&& fn, Ts&&... ts) {
+#if 0
     using ValueType =
         typename std::result_of_t<decltype(fn)(Ts && ...)>::ValueType;
+#else
+    using ValueType =
+        typename std::invoke_result_t<decltype(fn), Ts && ...>::ValueType;
+#endif
     Promise<ValueType> p;
     auto f = p.getFuture().via(ex);
     auto lazy = [p = std::move(p),
