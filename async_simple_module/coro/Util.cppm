@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+module;
+#include <cstdio> // stderr
 export module async_simple:coro.Util;
 
 import std;

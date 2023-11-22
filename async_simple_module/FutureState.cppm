@@ -15,6 +15,7 @@
  */
 module;
 #include <cassert>
+#include <cstdio> // stderr
 export module async_simple:FutureState;
 
 import :Common;
