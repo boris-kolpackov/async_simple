@@ -34,7 +34,7 @@ public:
 
     bool try_push(const T &item) {
         {
-            std::unique_lock<std::mutex> lock(_mutex, std::try_to_lock_in_modules);
+            std::unique_lock<std::mutex> lock(_mutex, std::try_to_lock/*_in_modules*/);
             if (!lock)
                 return false;
             _queue.push(item);
@@ -56,7 +56,7 @@ public:
     // non-blocking pop an item, maybe pop failed.
     // predict is an extension pop condition, default is null.
     bool try_pop(T &item, bool (*predict)(T &) = nullptr) {
-        std::unique_lock<std::mutex> lock(_mutex, std::try_to_lock_in_modules);
+        std::unique_lock<std::mutex> lock(_mutex, std::try_to_lock/*_in_modules*/);
         if (!lock || _queue.empty())
             return false;
 
