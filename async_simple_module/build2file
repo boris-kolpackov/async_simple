@@ -3,14 +3,9 @@ impl_libs = # Implementation dependencies.
 
 import impl_libs += libaio%lib{aio} # @@ Not sure if intf or impl.
 
-# @@ executors/ file to module name mapping.
-
 lib{async_simple}: mxx{** -test/**}
 lib{async_simple}: uthread/internal/S{*_x86_64_sysv_elf_gas}
 lib{async_simple}: $impl_libs $intf_libs
-
-executors/mxx{SimpleExecutor}: cxx.module_name = async_simple:executors.SimpleExecutor
-executors/mxx{SimpleIOExecutor}: cxx.module_name = async_simple:executors.SimpleIOExecutor
 
 # Build options.
 #
