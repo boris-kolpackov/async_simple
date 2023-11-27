@@ -8,4 +8,6 @@ url: https://github.com/alibaba/async_simple
 email: boris@codesynthesis.com
 depends: * build2 >= 0.17.0-
 depends: * bpkg >= 0.17.0-
-#depends: libhello ^1.0.0
+
+depends: gtest ^1.11.0
+depends: gmock ^1.11.0

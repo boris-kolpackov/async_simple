@@ -14,8 +14,7 @@ assert ($cxx.target.class == 'linux' && $cxx.target.cpu == 'x86_64') \
 using c
 using c.as-cpp
 
-
-hxx{*}: extension = hpp
+hxx{*}: extension = h
 cxx{*}: extension = cpp
 mxx{*}: extension = cppm
 

@@ -3,6 +3,11 @@ impl_libs = # Implementation dependencies.
 
 import impl_libs += libaio%lib{aio} # @@ Not sure if intf or impl.
 
+import test_libs = gtest%lib{gtest}
+import test_libs += gmock%lib{gmock}
+
+./: lib{async_simple} exe{async_simple_test}
+
 lib{async_simple}: mxx{** -test/**}
 lib{async_simple}: uthread/internal/S{*_x86_64_sysv_elf_gas}
 lib{async_simple}: $impl_libs $intf_libs
@@ -38,4 +43,11 @@ mxx{*}:
 {
   install         = include/async_simple/
   install.subdirs = true
+}
+
+# Test.
+#
+exe{async_simple_test}: test/{hxx cxx}{**} lib{async_simple} $test_libs
+{
+  test = true
 }
