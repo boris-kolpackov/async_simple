@@ -1,0 +1,5 @@
+import libs = async_simple%lib{async_simple}
+import libs += gtest%lib{gtest}
+import libs += gmock%lib{gmock}
+
+exe{async_simple_test}: {hxx cxx}{**} $libs

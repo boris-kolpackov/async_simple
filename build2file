@@ -1,1 +1,1 @@
-./: async_simple_module/ doc{README.md} legal{LICENSE} manifest
+./: async_simple_module/ async_simple_module_test/ doc{README.md} legal{LICENSE} manifest

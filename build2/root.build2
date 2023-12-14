@@ -2,7 +2,7 @@
 #
 #cxx.internal.scope = current
 
-cxx.std = experimental
+cxx.std = latest
 cxx.features.modules = true
 
 using cxx
